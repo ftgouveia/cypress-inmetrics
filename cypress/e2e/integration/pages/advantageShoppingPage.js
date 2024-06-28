@@ -2,8 +2,8 @@
 
 const pageElements = {
     searchButton: '#menuSearch',
-    searchBarButton: '#autoComplete',
-    clickProduct: "#output > div > div.top6Products > a.product.ng-scope",
+    searchBarButton: '#mobileSearch > input',
+    clickProduct: "#searchPage > div.noPromotedProductDiv > div > div > div:nth-child(2) > ul > li > p:nth-child(4) > a",
     selectColor: '#productProperties > div.colors.ng-scope > div:nth-child(2)',
     selectQuantity: '#productProperties > div.smoolMargin > e-sec-plus-minus > div > div:nth-child(2) > input',
     addCartButton: '#productProperties > div.fixedBtn > button',
@@ -20,8 +20,7 @@ const pageElements = {
 class advantageShoppingPage {
 
     searchProduct() {
-        cy.get(pageElements.searchButton).should("be.visible")
-        cy.get(pageElements.searchBarButton).should("be.visible").type("HP ELITEPAD 1000 G2 TABLET")
+        cy.get(pageElements.searchBarButton).should("be.visible").type("HP ELITEPAD 1000 G2 TABLET{enter}")
         cy.get(pageElements.clickProduct).should("be.visible").click()
     }
 
@@ -49,8 +48,9 @@ class advantageShoppingPage {
 
     ValidateProductPaymentMethod() {
         cy.get(pageElements.buttonNextPaymentMethod).should("be.visible").click()
-        cy.get(pageElements.validateNameProduct).should("have.text", "HP ELITEPAD 1000 G2 TABLET")
+        cy.get(pageElements.validateNameProduct).should("have.text", "HP ELITEPAD 1000 G2 TABLETHP ELITEPAD 1000 G2 TABLET")
 
     }
     
 }
+export const advantageShopping = new advantageShoppingPage();

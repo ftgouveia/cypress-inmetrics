@@ -1,26 +1,37 @@
-import { Given, Then } from "@badeball/cypress-cucumber-preprocessor";
-import { advantageShoppingPage } from '../pages/advantageShoppingPage'
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { advantageShopping } from '../pages/advantageShoppingPage'
+import { advantageShoppingApi } from '../pages/advantageShoppingApiPage'
 
 const url = "https://advantageonlineshopping.com/";
 
+
 Given(`I open advantageonlineshopping page`, () => {
+  cy.viewport(1024, 768)
   cy.visit(url);
 });
 
 When(`I search {string} in the search bar`, product => {
-  advantageShoppingPage.searchProduct();
+  advantageShopping.searchProduct();
 });
 
-And(`Add to cart`, () => {
-  advantageShoppingPage.selectColor();
-  advantageShoppingPage.addQuantity();
-  advantageShoppingPage.addCartAndCheckout()
+Then(`Add to cart`, () => {
+  advantageShopping.selectColor();
+  advantageShopping.addQuantity("1");
+  advantageShopping.addCartAndCheckout()
 });
 
 Then(`Login in cart`, () => {
-  advantageShoppingPage.loginAccount()
+  advantageShopping.loginAccount()
 });
 
-And(`Validate the product added into the checkout page`, () => {
-  advantageShoppingPage.ValidateProductPaymentMethod()
+Then(`Validate the product added into the checkout page`, () => {
+  advantageShopping.ValidateProductPaymentMethod()
+});
+
+Given(`I search {string} in api`, () => {
+  advantageShoppingApi.getProductApi()
+});
+
+Given(`I update image from product {string} in api`, () => {
+  advantageShoppingApi.getProductApi()
 });
